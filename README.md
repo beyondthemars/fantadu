@@ -120,3 +120,16 @@ Theme entwickelt von **Boy Ruehling**
 ---
 
 🎉 Viel Spaß mit Fantadu! Wenn Fragen sind, einfach reinschauen oder Boy anfunken.
+
+---
+
+## 📈 Tracking via Umami
+
+Dieses Theme verwendet kein integriertes Tracking. 
+Das Tracking wird stattdessen sauber über das Plugin **WPCode** eingebunden, 
+in dem der Tracking-Code von **Umami** (https://umami.is) hinterlegt ist. 
+So bleibt das Theme selbst schlank und Updatesicher.
+
+Du findest den Umami-Tracking-Code im WPCode Plugin innerhalb des WordPress Dashboards 
+unter „Code Snippets“. Dadurch ist das Tracking unabhängig vom Theme und kann jederzeit 
+angepasst oder deaktiviert werden, ohne das Theme zu ändern.
