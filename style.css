@@ -1,0 +1,741 @@
+/*
+Theme Name: Fantadu 1.2
+Theme URI: https://ankercode.de
+Author: Boy Ruehling
+Author URI: https://ankercode.de
+Description: Fantadu ist ein benutzerdefiniertes WordPress-Theme für den Kinderladen Fantadu e.V.. In dieser Version mit Logoanpassung via Customizer sowie 2 Bildern mit Links zur Job und Kindersuche
+Version: 1.2
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fantadu
+*/
+
+/* 
+========================================================
+SCHRIFTARTEN
+========================================================
+- Lokale Webfonts werden eingebunden.
+- Dadurch wird sichergestellt, dass auch ohne externe Anbieter
+  (wie Google Fonts) die richtigen Schriften genutzt werden.
+========================================================
+*/
+
+/* 
+--------------------------------------------------------
+CAVEAT
+--------------------------------------------------------
+- Handgeschriebene Schrift für Überschriften oder Highlights.
+- Wird in drei Gewichtungen geladen: Bold, Medium und Regular.
+*/
+@font-face {
+    font-family: 'Caveat'; /* Name der Schriftart */
+    src: url('assets/fonts/Caveat-Bold.ttf') format('truetype');
+    font-weight: 700; /* fett */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('assets/fonts/Caveat-Medium.ttf') format('truetype');
+    font-weight: 500; /* mittel */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('assets/fonts/Caveat-Regular.ttf') format('truetype');
+    font-weight: 400; /* normal */
+    font-style: normal;
+}
+
+/* 
+--------------------------------------------------------
+COMFORTAA
+--------------------------------------------------------
+- Runde, moderne Sans-Serif-Schrift für Fließtext und Navigation.
+- Wird in Bold und Regular eingebunden.
+*/
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('assets/fonts/Comfortaa-Bold.ttf') format('truetype');
+    font-weight: 700; /* fett */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('assets/fonts/Comfortaa-Regular.ttf') format('truetype');
+    font-weight: 400; /* normal */
+    font-style: normal;
+}
+
+
+/* 
+========================================================
+TEXTSTYLING
+========================================================
+- Globale Text- und Absatzklassen für individuelle Formatierungen
+- Spezielle Klassen für Ausrichtung, Farbe, Schriftarten 
+  und Zitate, die flexibel überall im Theme eingesetzt 
+  werden können.
+========================================================
+*/
+
+/* 
+--------------------------------------------------------
+FARBEN UND TEXTAUSRICHTUNG
+--------------------------------------------------------
+*/
+.text-color-orange {
+    color: #eda500; /* spezielles Orange für Hervorhebungen */
+}
+
+.text-links {
+    text-align: left; /* linksbündig */
+}
+
+.text-rechts {
+    text-align: right; /* rechtsbündig */
+}
+
+.text-zentriert {
+    text-align: center; /* zentriert */
+}
+
+.text-block {
+    text-align: justify; /* Blocksatz, gleicht links & rechts aus */
+}
+
+/* 
+--------------------------------------------------------
+SCHRIFTARTEN UND GRÖSSEN FÜR ÜBERSCHRIFTEN
+--------------------------------------------------------
+- Nutzt die handschriftähnliche Caveat-Schriftart
+- Unterschiedliche Größen je nach Hierarchie
+*/
+.caveat-h1 {
+    font-family: "Caveat"; /* handgeschrieben */
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.caveat-h2 {
+    font-family: "Caveat";
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.caveat-h3 {
+    font-family: "Caveat";
+    font-size: 24px;
+    font-weight: 400;
+}
+
+/* 
+--------------------------------------------------------
+ABSTANDSHELFER
+--------------------------------------------------------
+- Zum gezielten Anpassen von Abständen nach oben oder unten
+- Mit !important um andere Regeln sicher zu überschreiben
+*/
+.weniger-abstand-oben {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+
+.weniger-abstand-unten {
+    margin-bottom: -20px !important; /* zieht etwas hoch */
+    padding-bottom: 0px !important;
+}
+
+/* 
+--------------------------------------------------------
+ZITATE
+--------------------------------------------------------
+- Für visuell hervorgehobene Aussagen
+- Linke Linie, größere Schrift, etwas grau
+*/
+.zitat {
+    font-style: italic;
+    font-size: 20px;
+    color: #555; /* mittleres Grau */
+    border-left: 4px solid #eda500; /* orange Linie links */
+    padding-left: 20px; /* Abstand zum Text */
+    margin: 20px 40px; /* außen Platz */
+    line-height: 1.6; /* mehr Zeilenhöhe */
+    max-width: 600px; /* Begrenzung der Breite für bessere Lesbarkeit */
+}
+
+    
+/* 
+========================================================
+ALLGEMEINE STILE FÜR DIE SEITE
+========================================================
+*/
+
+/* 
+--------------------------------------------------------
+BODY
+--------------------------------------------------------
+- Setzt die Standardschriftart
+- Entfernt Standardabstände
+- Legt Hintergrund- und Textfarbe fest
+*/
+body {
+    font-family: "Comfortaa", sans-serif; /* Hauptschriftart */
+    margin: 0; /* entfernt Standard-Margin des Browsers */
+    padding: 0; /* entfernt Standard-Padding des Browsers */
+    background-color: #E7F3FF; /* hellblauer Hintergrund */
+    color: #005672; /* dunkles Blau für Texte */
+}
+
+/* 
+--------------------------------------------------------
+HEADER
+--------------------------------------------------------
+- Zentrierter Block oben auf der Seite
+- Mit Hintergrundfarbe identisch zum Body, 
+  damit es nahtlos aussieht
+*/
+header {
+    max-width: 90%; /* maximal 90% der Bildschirmbreite */
+    width: 100%; /* nimmt immer volle Breite, bis max-width greift */
+    margin: 0 auto; /* zentriert den Header horizontal */
+    text-align: center; /* zentriert Inhalte wie Logo und Menü */
+    padding: 20px 0; /* oben/unten Abstand */
+    background-color: #E7F3FF; /* selbe Hintergrundfarbe wie Body */
+    box-sizing: border-box; /* Padding und Border werden in die Breite eingerechnet */
+}
+
+/* 
+--------------------------------------------------------
+LOGO-CONTAINER
+--------------------------------------------------------
+- Sorgt für etwas Abstand zwischen Logo und folgenden Elementen
+*/
+.logo-container {
+    margin-bottom: 15px; /* Abstand unter dem Logo */
+}
+
+/* 
+--------------------------------------------------------
+SITE-LOGO-IMG
+--------------------------------------------------------
+- Stellt sicher, dass das Logo responsiv ist
+- Immer zentriert und maximal 500px breit
+*/
+.site-logo-img {
+    display: block; /* entfernt evtl. Inline-Spacing */
+    margin: 0 auto; /* zentriert das Bild horizontal */
+    width: 100%; /* Bild immer maximal so breit wie Container */
+    height: auto; /* behält Seitenverhältnis */
+    max-width: 500px; /* begrenzt auf 500px Breite */
+}
+
+
+/* 
+========================================================
+NAVIGATION HAUPTMENÜ
+========================================================
+- Das ist das Hauptmenü oben auf der Seite.
+- Es nutzt Flexbox für die horizontale Anordnung
+  und hat Hover- sowie Dropdown-Features.
+========================================================
+*/
+
+/* 
+--------------------------------------------------------
+HAUPTMENÜ CONTAINER
+--------------------------------------------------------
+- Flexbox sorgt für horizontale Ausrichtung und Lücken.
+*/
+.nav-menu {
+    list-style: none; /* entfernt Standard-Bullets */
+    padding: 0;
+    margin: 0;
+    display: flex; /* ordnet die Listenelemente nebeneinander an */
+    justify-content: center; /* zentriert das Menü horizontal */
+    gap: 30px; /* Abstand zwischen den Menüpunkten */
+}
+
+/* 
+--------------------------------------------------------
+LISTENELEMENTE
+--------------------------------------------------------
+- Position relative wichtig, damit das absolute Dropdown daran ausgerichtet werden kann.
+*/
+.nav-menu li {
+    position: relative;
+}
+
+/* 
+--------------------------------------------------------
+LINKS IM HAUPTMENÜ
+--------------------------------------------------------
+- Farben, Schrift, Hover-Übergänge etc.
+*/
+.nav-menu a {
+    text-decoration: none; /* keine Unterstreichung */
+    color: #005672; /* dunkelblau */
+    font-weight: bold;
+    padding: 10px 15px; /* Polsterung für Klickfläche */
+    display: block; /* macht den gesamten Bereich klickbar */
+    white-space: nowrap; /* verhindert Umbrüche */
+    transition: color 0.3s, background 0.3s; /* sanfte Farbwechsel */
+}
+
+/* Hover-Effekt für Hauptlinks */
+.nav-menu a:hover {
+    color: #eda500; /* Orange beim Hover */
+    background: rgba(231, 243, 255, 0.5); /* leicht blaue Hinterlegung */
+    border-radius: 5px; /* leicht abgerundet */
+}
+
+/* 
+========================================================
+UNTERMENÜ / DROPDOWN
+========================================================
+- Wird erst sichtbar, wenn man über das Listenelement hovert.
+- Zuerst unsichtbar & leicht verschoben, dann sanft eingeblendet.
+*/
+
+/* Untermenü selbst */
+.nav-menu li ul {
+    position: absolute; /* orientiert sich am li */
+    top: 105%; /* direkt unter dem Hauptlink */
+    left: 0;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* sanfter Schatten */
+    border-radius: 8px;
+    list-style: none;
+    min-width: auto;
+    width: max-content; /* passt sich Inhalt an */
+    opacity: 0; /* unsichtbar */
+    transform: translateY(10px); /* leicht nach unten versetzt */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+    pointer-events: none; /* kann nicht geklickt werden solange unsichtbar */
+    margin-top: -5px; /* optischer Ausgleich */
+}
+
+/* Dropdown beim Hover sichtbar machen */
+.nav-menu li:hover > ul {
+    opacity: 1;
+    transform: translateY(0); /* wieder auf ursprüngliche Position */
+    pointer-events: auto;
+    transition-delay: 0s; /* sofort sichtbar */
+}
+
+/* Verzögertes Ausblenden beim Weggehen */
+.nav-menu li:not(:hover) > ul {
+    transition-delay: 0.2s;
+}
+
+/* 
+--------------------------------------------------------
+ELEMENTE IM DROPDOWN
+--------------------------------------------------------
+*/
+.nav-menu li ul li {
+    width: 100%; /* füllt das Dropdown vollständig aus */
+}
+
+/* Links im Dropdown */
+.nav-menu li ul a {
+    padding: 10px 20px 10px 5px; /* oben rechts unten links */
+    display: block; /* ganze Fläche klickbar */
+    color: #005672;
+    background: transparent;
+    text-align: left;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover im Dropdown */
+.nav-menu li ul a:hover {
+    background: #E7F3FF; /* leicht blauer Hintergrund */
+    color: #eda500; /* orange Schrift */
+}
+
+/* 
+--------------------------------------------------------
+PFEIL-ICON FÜR DROPDOWNS
+--------------------------------------------------------
+- Automatisch hinter Links mit Untermenü
+- Dreht sich bei Hover
+*/
+.nav-menu li:has(ul) > a::after {
+    content: " ▼"; /* kleines Pfeil-Icon */
+    font-size: 12px;
+    transition: transform 0.3s; /* Rotation animieren */
+}
+
+/* Pfeil dreht sich beim Hover */
+.nav-menu li:hover > a::after {
+    transform: rotate(180deg);
+}
+
+/* 
+========================================================
+HAUPTINHALT & FOOTER
+========================================================
+*/
+
+/* 
+--------------------------------------------------------
+MAIN CONTENT
+--------------------------------------------------------
+- Beschränkt die Breite des Inhaltsbereichs,
+- zentriert ihn und gibt etwas Luft drumherum.
+*/
+main {
+    max-width: 800px; /* maximale Breite für gute Lesbarkeit */
+    margin: 20px auto; /* 20px oben/unten und automatisch zentriert */
+    padding: 20px; /* Innenabstand rundherum */
+    background: #e7f3ff; /* hellblauer Hintergrund, passend zum Gesamtdesign */
+}
+
+/* 
+--------------------------------------------------------
+FOOTER
+--------------------------------------------------------
+- Der untere Bereich der Seite.
+- Leicht transparent und hellblau, damit das Bild durchscheinen kann.
+*/
+footer {
+    background: rgba(231, 243, 255, 0.9); /* leicht transparentes Hellblau */
+    text-align: center;
+    padding: 10px;
+    background-color: #E7F3FF; /* fallback falls rgba nicht unterstützt */
+    color: #005672; /* dunkelblauer Text */
+    margin-top: 20px;
+    position: relative; /* wichtig, damit z.B. das Logo sich daran orientieren kann */
+    min-height: 200px; /* sorgt dafür, dass genug Platz im Footer ist */
+}
+
+/* 
+--------------------------------------------------------
+FOOTER MENÜ
+--------------------------------------------------------
+- Horizontale Links, die nebeneinander stehen.
+*/
+.footer-menu {
+    list-style: none; /* keine Bullet-Points */
+    padding: 0;
+    text-align: center;
+}
+
+.footer-menu li {
+    display: inline; /* nebeneinander statt untereinander */
+    margin: 0 10px; /* Abstand links/rechts */
+}
+
+.footer-menu a {
+    color: #005672;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Hover-Effekt für Footer-Links */
+.footer-menu a:hover {
+    color: #eda500; /* orange beim Hover */
+}
+
+/* 
+--------------------------------------------------------
+FOOTER WIDGETS
+--------------------------------------------------------
+- Legt Widgets im Footer nebeneinander mit Flexbox.
+- Transparent, damit das Bild im Hintergrund sichtbar bleibt.
+*/
+.footer-widgets {
+    background: transparent !important; /* wirklich komplett transparent */
+    display: flex;
+    justify-content: center; /* horizontal zentriert */
+    align-items: center; /* vertikal zentriert */
+    padding: 20px;
+    text-align: center;
+    max-width: 900px; /* optional zur Begrenzung */
+    margin: 0 auto;
+    flex-wrap: wrap; /* bricht bei kleineren Bildschirmen um */
+    position: relative;
+    z-index: 0; /* damit z.B. Bilder darüber liegen können */
+}
+
+/* Einzelne Widget-Spalten */
+.footer-column {
+    flex: 1; /* nimmt gleichen Platz ein */
+    max-width: 300px; /* begrenzt, damit’s nicht zu breit wird */
+    text-align: center;
+}
+
+/* Widget-Titel */
+.widget-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Widget-Inhalte */
+.footer-widget {
+    padding: 10px;
+    background: transparent !important;
+    border-radius: 5px;
+    /* box-shadow optional einkommentieren */
+    /* box-shadow: 0px 0px 5px rgba(0,0,0,0.1); */
+}
+
+/* 
+--------------------------------------------------------
+ÜBERSCHRIFTEN / TITEL
+--------------------------------------------------------
+- Auf Seiten und Beiträgen ausgeblendet, damit du z.B. 
+  eigene Titel in Content-Blöcken nutzen kannst.
+*/
+.page-title {
+    display: none;
+}
+
+.single-title {
+    display: none;
+}
+
+/* Spezielle Styling für Blog-Post Titel Links */
+.blog-post-title a {
+    text-decoration: none !important;
+    color: #eda500 !important; /* orange */
+    font-family: "Caveat", cursive; /* handschriftlich */
+    font-size: 30px;
+    font-weight: 400;
+}
+
+/* 
+--------------------------------------------------------
+FESTE BILDER / DEKORATIVE ELEMENTE
+========================================================
+*/
+
+/* Bild rechts unten z.B. Maskottchen */
+.fantadusi-logo {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 600px;
+    height: auto;
+    z-index: 1; /* liegt hinter anderem Content */
+    opacity: 0.7; /* leicht transparent */
+    pointer-events: none; /* Bild ist nicht anklickbar */
+}
+
+/* Container für optionale fixierte Bilder */
+.fixed-image-container {
+    position: fixed; /* bleibt beim Scrollen immer sichtbar */
+    height: auto;
+    z-index: 9999; /* liegt ganz oben */
+    opacity: 0.9;
+}
+
+.fixed-image-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* Erstes Bild – unten rechts */
+.image-1 {
+    right: 20px;
+    bottom: 0px;
+    width: 200px;
+}
+
+/* Zweites Bild – unten links */
+.image-2 {
+    left: 40px;
+    bottom: 350px;
+    width: 150px;
+}
+
+/* 
+========================================================
+MOBILES MENÜ
+========================================================
+*/
+
+/* Hamburger-Button */
+#menu-toggle {
+    display: none; /* wird nur auf kleinen Geräten eingeblendet */
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Standard-Desktop-Menü sichtbar */
+#main-menu {
+    display: flex;
+    justify-content: center;
+}
+
+/* 
+--------------------------------------------------------
+RESPONSIVE NAVIGATION
+--------------------------------------------------------
+- Ab 768px Bildschirmbreite wird das Hauptmenü 
+  zum Hamburger-Menü.
+*/
+@media screen and (max-width: 768px) {
+    #menu-toggle {
+        display: block; /* Hamburger anzeigen */
+    }
+
+    #main-menu {
+        display: none; /* Menü ausblenden bis geöffnet */
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu {
+        flex-direction: column; /* Menüpunkte untereinander */
+        align-items: center;
+    }
+
+    .nav-menu li {
+        padding: 15px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav-menu a {
+        font-size: 18px;
+    }
+
+    /* Menü sichtbar wenn aktiv (per JS) */
+    #main-menu.active {
+        display: flex;
+    }
+}
+
+/* 
+========================================================
+PARTNER-LOGOS
+========================================================
+- Logos von Unterstützern, Sponsoren etc. als Zeile
+- mit Hover-Zoom und Anpassung auf Mobile
+*/
+.partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 0;
+    /* background-color: #f9f9f9; optionaler Hintergrund */
+}
+
+.partner-logo > img {
+    height: 100px !important;
+    width: auto !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* Zoom beim Hover */
+.partner-logo img:hover {
+    transform: scale(1.05);
+}
+
+/* kleinere Logos auf kleinen Geräten */
+@media screen and (max-width: 600px) {
+    .partner-logo img {
+        max-height: 50px;
+    }
+}
+
+/* 
+========================================================
+DROPDOWN-MENÜ
+========================================================
+- Diese Stile betreffen die Untermenüs (z. B. bei Hover).
+- Sie sorgen dafür, dass das Menü dynamisch auf den Inhalt
+  reagiert und sauber ohne unnötigen Abstand dargestellt wird.
+========================================================
+*/
+
+/* 
+--------------------------------------------------------
+DROPDOWN-MENÜ-CONTAINER
+--------------------------------------------------------
+- Passt die Breite automatisch an den längsten Link an
+- Entfernt Standardabstände
+*/
+.nav-menu li ul {
+    min-width: auto; /* entfernt feste Mindestbreite, damit max-content greift */
+    width: max-content; /* passt sich dem längsten Link an */
+    padding: 0; /* entfernt innen-Abstand */
+    margin: 0; /* entfernt außen-Abstand */
+}
+
+/* 
+--------------------------------------------------------
+LISTENPUNKTE IM DROPDOWN
+--------------------------------------------------------
+- Kein Padding/Margin und keine Bullet-Points,
+  damit das Dropdown "clean" aussieht.
+*/
+.nav-menu li ul li {
+    padding: 0; /* innen-Abstand raus */
+    margin: 0; /* außen-Abstand raus */
+    list-style: none; /* keine Aufzählungszeichen */
+}
+
+/* 
+--------------------------------------------------------
+LINKS IM DROPDOWN
+--------------------------------------------------------
+- Polsterung sorgt dafür, dass Links genug Fläche bieten,
+  damit sie leicht mit Maus oder Finger getroffen werden.
+- display: block macht die ganze Zeile klickbar.
+*/
+.nav-menu li ul a {
+    padding: 10px 15px 10px 15px !important; 
+    /* oben rechts unten links: mehr horizontale Polsterung */
+    display: block; /* ganze Fläche des Elements klickbar */
+}
+
+
+/* 
+========================================================
+HEADER NAVIGATION STYLING
+========================================================
+*/
+
+/* Standard-Desktop-Ansicht */
+header nav {
+    background-color: #f9c846; /* sattes Gelb als Hintergrundfarbe */
+    padding: 15px 200px; /* innen: oben/unten 15px, links/rechts 200px */
+    max-width: 500px; /* maximal 500px breit, auch wenn mehr Platz da ist */
+    margin: 20px auto; /* 20px Abstand oben/unten, zentriert (auto links/rechts) */
+    border-radius: 30px; /* schöne abgerundete Ecken */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* weicher Schatten, leicht nach unten */
+    transition: all 0.3s ease; /* sanfte Übergänge z.B. bei Hover oder Resize */
+}
+
+/* 
+--------------------------------------------------------
+RESPONSIVE DESIGN
+--------------------------------------------------------
+Für Bildschirme bis max. 768px (z.B. Tablets & Smartphones):
+Die Navigation passt sich deutlich schmaler an, damit es nicht
+so überdimensioniert aussieht.
+*/
+@media (max-width: 768px) {
+    header nav {
+        padding: 15px 20px; /* innen links/rechts stark reduziert */
+        max-width: 90%; /* nimmt bis zu 90% der Bildschirmbreite ein */
+        border-radius: 20px; /* kleinere Rundung für kompakteren Look */
+    }
+}
