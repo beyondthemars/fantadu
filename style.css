@@ -559,7 +559,7 @@ MOBILES MENÜ
 ========================================================
 */
 #menu-toggle {
-    display: none; 
+    display: none;
     background: #005672;
     color: white;
     padding: 10px 20px;
@@ -569,7 +569,9 @@ MOBILES MENÜ
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    margin: 20px auto 0 auto; /* ZENTRIERT UNTER LOGO */
+    margin: 20px auto 0 auto;
+    position: relative; /* NEU */
+    z-index: 1100; /* höher als das Menü */
 }
 
 #main-menu {
