@@ -569,7 +569,7 @@ MOBILES MENÜ
     cursor: pointer;
     text-align: center;
     position: absolute;
-    top: 50px; /* ABSTAND VON OBEN */
+    top: 100px; /* ABSTAND VON OBEN */
     right: 20px; /* ABSTAND VON RECHTS */
     z-index: 1001;
 }
