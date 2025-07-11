@@ -35,6 +35,7 @@
 
     <?php wp_head(); ?>
 </head>
+<body>
 <header>
     <div class="logo-container">
         <?php
