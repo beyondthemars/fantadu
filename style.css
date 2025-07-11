@@ -586,40 +586,55 @@ RESPONSIVE NAVIGATION
 */
 @media screen and (max-width: 768px) {
     #menu-toggle {
-        display: block; /* Hamburger anzeigen */
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
     }
 
     #main-menu {
-        display: none; /* Menü ausblenden bis geöffnet */
+        display: flex;
         flex-direction: column;
         background: white;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        right: -100%; /* Start außerhalb */
+        width: 80%;
+        height: 100%;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+        transition: right 0.3s ease;
+        padding-top: 60px;
+        z-index: 1000;
+    }
+
+    #main-menu.active {
+        right: 0; /* rein sliden */
     }
 
     .nav-menu {
-        flex-direction: column; /* Menüpunkte untereinander */
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20px;
     }
 
     .nav-menu li {
+        width: 100%;
         padding: 15px 0;
         border-bottom: 1px solid #ddd;
     }
 
     .nav-menu a {
         font-size: 18px;
-    }
-
-    /* Menü sichtbar wenn aktiv (per JS) */
-    #main-menu.active {
-        display: flex;
+        width: 100%;
     }
 }
-
 /* 
 ========================================================
 PARTNER-LOGOS
