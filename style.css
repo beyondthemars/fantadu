@@ -539,6 +539,21 @@ FESTE BILDER / DEKORATIVE ELEMENTE
     height: auto;
 }
 
+/* Close-Button oben rechts im Bild */
+.fixed-image-container .close-fixed-image {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    z-index: 10000;
+}
+
 /* Erstes Bild – unten rechts */
 .image-1 {
     right: 20px;
@@ -551,6 +566,20 @@ FESTE BILDER / DEKORATIVE ELEMENTE
     left: 40px;
     bottom: 350px;
     width: 150px;
+}
+
+/* Responsiv kleiner machen */
+@media (max-width: 600px) {
+    .fixed-image-container.image-1 {
+        width: 120px;
+        right: 10px;
+        bottom: 10px;
+    }
+    .fixed-image-container.image-2 {
+        width: 100px;
+        left: 10px;
+        bottom: 200px;
+    }
 }
 
 /* 
