@@ -542,14 +542,14 @@ FESTE BILDER / DEKORATIVE ELEMENTE
 /* Close-Button oben rechts im Bild */
 .fixed-image-container .close-fixed-image {
     position: absolute;
-    top: 5px;
+    top: 2px;
     right: 10px;
     background: rgba(0,0,0,0.6);
     color: white;
     padding: 8px 16px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 36px;
+    font-size: 30px;
     line-height: 1;
     z-index: 10000;
 }
