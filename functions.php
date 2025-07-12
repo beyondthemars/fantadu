@@ -162,11 +162,32 @@ function fantadu_customizer_fixed_images($wp_customize) {
 }
 add_action('customize_register', 'fantadu_customizer_fixed_images');
 
-//Beiträge in wp-admin ausblenden
+// Beiträge in wp-admin ausblenden
 function remove_posts_menu_for_all() {
     remove_menu_page('edit.php'); // Entfernt "Beiträge"
 }
 add_action('admin_menu', 'remove_posts_menu_for_all');
+
+// Kommentare in wp-admin ausblenden
+function remove_comments_menu_for_all() {
+    remove_menu_page('edit-comments.php'); // Entfernt "Kommentare"
+}
+add_action('admin_menu', 'remove_comments_menu_for_all');
+
+// Kommentare komplett deaktivieren
+function fantadu_disable_comments() {
+    // Entfernt Kommentare-Support bei allen Post Types
+    foreach (get_post_types() as $post_type) {
+        if (post_type_supports($post_type, 'comments')) {
+            remove_post_type_support($post_type, 'comments');
+            remove_post_type_support($post_type, 'trackbacks');
+        }
+    }
+}
+add_action('admin_init', 'fantadu_disable_comments');
+
+
+//Partnerlogos
 
 function fantadu_customizer_partnerlogos($wp_customize) {
     $wp_customize->add_section('fantadu_partnerlogos_section', array(
