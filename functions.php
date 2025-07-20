@@ -290,7 +290,7 @@ function fantadu_kinderplatz_shortcode() {
     ob_start();
     ?>
     <section class="kinderplatz-verfuegbarkeit">
-        <h2 class="caveat-h2">Verfügbarkeit von Kinderplätzen</h2>
+        <h2 class="caveat-h2 text-color-orange">Verfügbarkeit von Kinderplätzen</h2>
 
         <h3 class="caveat-h3">Unter 3 Jahren</h3>
         <?php if (!empty($u3_list)): ?>
