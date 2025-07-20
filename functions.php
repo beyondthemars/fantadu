@@ -265,7 +265,6 @@ function fantadu_customizer_kinderplaetze($wp_customize) {
 }
 
 
-//Shortcode fuer Platzvergabe
 function fantadu_kinderplatz_shortcode() {
     $u3_list = [];
     $ue3_list = [];
@@ -291,9 +290,9 @@ function fantadu_kinderplatz_shortcode() {
     ob_start();
     ?>
     <section class="kinderplatz-verfuegbarkeit">
-        <h2>Verfügbarkeit von Kinderplätzen</h2>
+        <h2 class="caveat-h2">Verfügbarkeit von Kinderplätzen</h2>
 
-        <h3>Unter 3 Jahren</h3>
+        <h3 class="caveat-h3">Unter 3 Jahren</h3>
         <?php if (!empty($u3_list)): ?>
             <ul>
                 <?php foreach ($u3_list as $entry): ?>
@@ -304,7 +303,7 @@ function fantadu_kinderplatz_shortcode() {
             <p>Aktuell keine Plätze frei.</p>
         <?php endif; ?>
 
-        <h3>Über 3 Jahren</h3>
+        <h3 class="caveat-h3">Über 3 Jahren</h3>
         <?php if (!empty($ue3_list)): ?>
             <ul>
                 <?php foreach ($ue3_list as $entry): ?>
@@ -318,5 +317,6 @@ function fantadu_kinderplatz_shortcode() {
     <?php
     return ob_get_clean();
 }
+
 add_action('customize_register', 'fantadu_customizer_kinderplaetze');
 add_shortcode('kinderplaetze', 'fantadu_kinderplatz_shortcode');
