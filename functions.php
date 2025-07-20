@@ -318,3 +318,5 @@ function fantadu_kinderplatz_shortcode() {
     <?php
     return ob_get_clean();
 }
+add_action('customize_register', 'fantadu_customizer_kinderplaetze');
+add_shortcode('kinderplaetze', 'fantadu_kinderplatz_shortcode');
