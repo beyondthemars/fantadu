@@ -296,7 +296,9 @@ function fantadu_kinderplatz_shortcode() {
         <h2 class="caveat-h2 text-color-orange">
             Verfügbarkeit von Kinderplätzen
             <?php if ($update): ?>
-                <small style="font-size: 14px; font-weight: normal;"> (Aktualisiert <?php echo esc_html($update); ?>)</small>
+                <small style="font-size: 14px; font-weight: normal; color: #005672; opacity: 0.8; margin-left: 8px;">
+                    (Aktualisiert <?php echo esc_html($update); ?>)
+                </small>
             <?php endif; ?>
         </h2>
 
@@ -325,6 +327,7 @@ function fantadu_kinderplatz_shortcode() {
     <?php
     return ob_get_clean();
 }
+
 
 
 add_action('customize_register', 'fantadu_customizer_kinderplaetze');
