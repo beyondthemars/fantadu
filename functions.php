@@ -287,10 +287,18 @@ function fantadu_kinderplatz_shortcode() {
         }
     }
 
+    // Aktualisierungsdatum abrufen
+    $update = get_theme_mod('kinderplatz_letzte_aktualisierung');
+
     ob_start();
     ?>
     <section class="kinderplatz-verfuegbarkeit">
-        <h2 class="caveat-h2 text-color-orange">Verfügbarkeit von Kinderplätzen</h2>
+        <h2 class="caveat-h2 text-color-orange">
+            Verfügbarkeit von Kinderplätzen
+            <?php if ($update): ?>
+                <small style="font-size: 14px; font-weight: normal;"> (Aktualisiert <?php echo esc_html($update); ?>)</small>
+            <?php endif; ?>
+        </h2>
 
         <h3 class="caveat-h3">Unter 3 Jahren</h3>
         <?php if (!empty($u3_list)): ?>
@@ -318,5 +326,35 @@ function fantadu_kinderplatz_shortcode() {
     return ob_get_clean();
 }
 
+
 add_action('customize_register', 'fantadu_customizer_kinderplaetze');
 add_shortcode('kinderplaetze', 'fantadu_kinderplatz_shortcode');
+
+function fantadu_speichere_kinderplatz_update_datum( $wp_customize ) {
+    if ( ! is_admin() || ! isset($_POST['customized']) ) return;
+
+    $data = json_decode(stripslashes($_POST['customized']), true);
+    $relevant_keys = [];
+
+    // Prüfe, ob eins der Platzfelder geändert wurde
+    for ($i = 1; $i <= 4; $i++) {
+        $relevant_keys[] = "kinderplatz_anzahl_$i";
+        $relevant_keys[] = "kinderplatz_u3_$i";
+        $relevant_keys[] = "kinderplatz_datum_$i";
+    }
+
+    $update_needed = false;
+    foreach ($relevant_keys as $key) {
+        if (isset($data[$key])) {
+            $update_needed = true;
+            break;
+        }
+    }
+
+    if ($update_needed) {
+        // Speichere das aktuelle Datum im Format "Juli 2025"
+        $monat_jahr = date_i18n('F Y');
+        set_theme_mod('kinderplatz_letzte_aktualisierung', $monat_jahr);
+    }
+}
+add_action('customize_save_after', 'fantadu_speichere_kinderplatz_update_datum');
