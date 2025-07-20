@@ -220,3 +220,52 @@ function fantadu_customizer_partnerlogos($wp_customize) {
     }
 }
 add_action('customize_register', 'fantadu_customizer_partnerlogos');
+
+//Platzvergabe
+function fantadu_customizer_kinderplaetze($wp_customize) {
+    $wp_customize->add_section('fantadu_kinderplaetze_section', array(
+        'title'    => __('Verfügbarkeit Kinderplätze', 'fantadu'),
+        'priority' => 40,
+    ));
+
+    // U3 Textfeld
+    $wp_customize->add_setting('fantadu_kinderplatz_u3', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('fantadu_kinderplatz_u3', array(
+        'type'    => 'text',
+        'section' => 'fantadu_kinderplaetze_section',
+        'label'   => __('Verfügbarkeit für Kinder unter 3 Jahren', 'fantadu'),
+    ));
+
+    // Ü3 Textfeld
+    $wp_customize->add_setting('fantadu_kinderplatz_ue3', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('fantadu_kinderplatz_ue3', array(
+        'type'    => 'text',
+        'section' => 'fantadu_kinderplaetze_section',
+        'label'   => __('Verfügbarkeit für Kinder über 3 Jahren', 'fantadu'),
+    ));
+}
+add_action('customize_register', 'fantadu_customizer_kinderplaetze');
+
+
+//Shortcode fuer Platzvergabe
+function fantadu_kinderplatz_shortcode() {
+    $u3 = get_theme_mod('fantadu_kinderplatz_u3');
+    $ue3 = get_theme_mod('fantadu_kinderplatz_ue3');
+
+    ob_start();
+    ?>
+    <section class="kinderplatz-verfuegbarkeit">
+        <h2>Verfügbarkeit von Kinderplätzen</h2>
+        <p><strong>Unter 3 Jahren:</strong> <?php echo esc_html($u3 ?: 'Aktuell keine Plätze frei.'); ?></p>
+        <p><strong>Über 3 Jahren:</strong> <?php echo esc_html($ue3 ?: 'Aktuell keine Plätze frei.'); ?></p>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('kinderplaetze', 'fantadu_kinderplatz_shortcode');
