@@ -361,3 +361,29 @@ function fantadu_speichere_kinderplatz_update_datum( $wp_customize ) {
     }
 }
 add_action('customize_save_after', 'fantadu_speichere_kinderplatz_update_datum');
+
+// 404-Seiten automatisch auf die Startseite weiterleiten (mit sinnvollen Ausnahmen)
+add_action('template_redirect', function () {
+    if (is_404() && !is_admin() && !is_feed()) {
+
+        $uri = $_SERVER['REQUEST_URI'];
+
+        // bestimmte URLs ignorieren
+        $ausschluss = [
+            '/wp-json',         // API
+            '/robots.txt',      // Robots-Datei
+            '/sitemap.xml',     // Sitemap
+            '/favicon.ico',     // Browser-Favicon
+        ];
+
+        foreach ($ausschluss as $aus) {
+            if (strpos($uri, $aus) === 0) {
+                return; // keine Umleitung
+            }
+        }
+
+        // Umleitung auf Startseite
+        wp_redirect(home_url('/'), 302);
+        exit;
+    }
+});
