@@ -83,6 +83,10 @@ Es legt Wert auf ein kindgerechtes, freundliches Design, volle Kontrolle über L
 ✅ **Backend-Aufräumen:**
 - `Posts` komplett ausgeblendet.
 
+✅ **404 Redirect**
+- 404-Seiten automatisch auf die Startseite weiterleiten (mit sinnvollen Ausnahmen)
+
+
 ## 🖼 Fixe Bilder (Customizer)
 Im Customizer unter  
 **„Jobs und Kinder Einstellungen“**:
