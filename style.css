@@ -4,7 +4,7 @@ Theme URI: https://ankercode.de
 Author: Boy Ruehling
 Author URI: https://ankercode.de
 Description: Fantadu ist ein benutzerdefiniertes WordPress-Theme für den Kinderladen Fantadu e.V.. In dieser Version mit Logoanpassung via Customizer sowie 2 Bildern mit Links zur Job und Kindersuche
-Version: 1.3
+Version: 1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: fantadu
@@ -608,48 +608,6 @@ MOBILES MENÜ
     justify-content: center;
 }
 
-@media screen and (max-width: 768px) {
-    #menu-toggle {
-        display: block; /* nur auf Mobile sichtbar */
-    }
-
-    #main-menu {
-        display: flex;
-        flex-direction: column;
-        background: white;
-        position: fixed;
-        top: 0;
-        right: -100%; 
-        width: 80%;
-        height: 100%;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-        transition: right 0.3s ease;
-        padding-top: 60px;
-        z-index: 1000;
-    }
-
-    #main-menu.active {
-        right: 0;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-left: 20px;
-    }
-
-    .nav-menu li {
-        width: 100%;
-        padding: 15px 0;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .nav-menu a {
-        font-size: 18px;
-        width: 100%;
-    }
-}
-
 /* 
 ========================================================
 PARTNER-LOGOS
@@ -780,59 +738,6 @@ so überdimensioniert aussieht.
 }
 
 @media (max-width: 768px) {
-    #main-menu {
-        box-sizing: border-box;
-        margin: 0;
-        width: 80%;
-        max-width: 90%;
-        height: 100vh;
-        height: 100dvh;
-        padding: 80px 20px 20px;
-        justify-content: flex-start;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        visibility: hidden;
-        transition: right 0.3s ease, visibility 0.3s;
-    }
-
-    #menu-toggle[aria-expanded="true"] {
-        position: fixed;
-        top: 15px;
-        right: 20px;
-        margin: 0;
-    }
-
-    #main-menu.active {
-        visibility: visible;
-    }
-
-    .nav-menu {
-        gap: 0;
-        padding: 0;
-    }
-
-    .nav-menu a {
-        box-sizing: border-box;
-        white-space: normal;
-        overflow-wrap: anywhere;
-        min-height: 44px;
-    }
-
-    /* Touch navigation does not depend on hover; all child links stay reachable. */
-    .nav-menu li ul {
-        position: static;
-        width: 100%;
-        opacity: 1;
-        transform: none;
-        pointer-events: auto;
-        box-shadow: none;
-        transition: none;
-    }
-
-    .nav-menu li:has(ul) > a::after {
-        content: "";
-    }
-
     main {
         overflow-wrap: anywhere;
     }
@@ -880,5 +785,111 @@ so überdimensioniert aussieht.
     .fixed-image-container.image-1, .fixed-image-container.image-2 {
         inset: auto;
         max-width: calc(100% - 20px);
+    }
+}
+
+/* Mobile navigation 1.4: an in-flow accordion below the logo. */
+.submenu-toggle { display: none; }
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        margin: 8px auto 0;
+        padding: 10px 22px;
+        font: 700 16px/1.4 'Comfortaa', sans-serif;
+        border-radius: 24px;
+        box-shadow: 0 3px 8px rgba(0, 86, 114, .15);
+        position: static;
+    }
+    header #main-menu {
+        display: block;
+        position: static;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin: 16px auto 0;
+        padding: 10px 14px;
+        background: #f9c846;
+        border-radius: 22px;
+        box-shadow: 0 4px 12px rgba(0, 86, 114, .1);
+        text-align: left;
+        visibility: visible;
+        overflow: visible;
+        transition: none;
+    }
+    .mobile-menu-ready header #main-menu:not(.active) { display: none; }
+    #main-menu .nav-menu {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+    #main-menu .nav-menu li {
+        position: relative;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    #main-menu .nav-menu > li + li { border-top: 1px solid rgba(0,86,114,.16); }
+    #main-menu .nav-menu a {
+        box-sizing: border-box;
+        display: block;
+        width: auto;
+        min-height: 48px;
+        padding: 14px 12px;
+        font: 700 16px/1.5 'Comfortaa', sans-serif;
+        text-align: left;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        border-radius: 12px;
+    }
+    #main-menu .nav-menu li:has(> ul) > a { padding-right: 58px; }
+    #main-menu .nav-menu li > a::after { content: none; }
+    #main-menu .submenu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 3px;
+        right: 1px;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        color: #005672;
+        background: rgba(255,255,255,.55);
+        font: 400 26px/1 sans-serif;
+        cursor: pointer;
+    }
+    #main-menu .nav-menu li ul {
+        position: static;
+        box-sizing: border-box;
+        width: auto;
+        min-width: 0;
+        margin: 0 0 10px;
+        padding: 4px;
+        border-radius: 14px;
+        background: #fff9e8;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        transition: none;
+    }
+    #main-menu .nav-menu ul[hidden] { display: none; }
+    #main-menu .nav-menu li ul a {
+        padding: 11px 14px !important;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    #main-menu a:hover, #main-menu a:focus-visible { background: rgba(255,255,255,.6); color: #005672; }
+    #main-menu .current-menu-item > a { text-decoration: underline; text-underline-offset: 4px; }
+    #menu-toggle:focus-visible, #main-menu a:focus-visible, #main-menu button:focus-visible {
+        outline: 3px solid #005672;
+        outline-offset: 2px;
     }
 }
