@@ -74,15 +74,36 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Hamburger-Menü Toggle
+    // Keep the button and the mobile drawer in sync, including after resizing.
     var menuToggle = document.getElementById("menu-toggle");
     var menu = document.getElementById("main-menu");
+    var mobileMenu = window.matchMedia("(max-width: 768px)");
 
     if (menuToggle && menu) {
-        menuToggle.addEventListener("click", function(event) {
-            event.preventDefault();
-            menu.classList.toggle("active");
+        function setMenuOpen(open, restoreFocus) {
+            menu.classList.toggle("active", open);
+            menuToggle.setAttribute("aria-expanded", String(open));
+            menuToggle.textContent = open ? "× Menü schließen" : "☰ Menü";
+            if (restoreFocus) menuToggle.focus();
+        }
+
+        menuToggle.addEventListener("click", function() {
+            setMenuOpen(!menu.classList.contains("active"));
         });
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape" && mobileMenu.matches && menu.classList.contains("active")) {
+                setMenuOpen(false, true);
+            }
+        });
+        document.addEventListener("click", function(event) {
+            if (mobileMenu.matches && !menu.contains(event.target) && !menuToggle.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        });
+        menu.addEventListener("click", function(event) {
+            if (mobileMenu.matches && event.target.closest("a")) setMenuOpen(false);
+        });
+        mobileMenu.addEventListener("change", function() { setMenuOpen(false); });
     }
 
     // Fixed-Images Close-Buttons
