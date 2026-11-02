@@ -38,3 +38,14 @@ Lokal ist weder PHP noch WordPress vorhanden. Eine temporäre HTML-Testseite ver
 5. **Optionale Hinweisbilder:** Desktopseitig bleiben sie fixiert und können je nach Inhalt Text überdecken; die Schließflächen sind nicht per Tastatur bedienbare `span`-Elemente. Dafür wäre eine gesonderte barrierefreie Button-Korrektur sinnvoll.
 
 Die Korrekturen sind zur Review vorgesehen; der PR wurde nicht zusammengeführt und das WordPress-Theme nicht live installiert.
+
+## Nachprüfung mit echten Live-Inhalten
+
+Auf Wunsch zusätzlich alle 13 unterschiedlichen Seiten aus Haupt- und Footermenü auf https://www.kila-fantadu.de/ (Weiterleitung zu https://kila-fantadu.de/) geprüft: Startseite, Der Fantadu, Unser Name, Konzept, Kinderrechte, Fotos, Unser Team, Kinderladenkonzept, Platzvergabe, Eingewöhnung, Karriere, Kontakt und Impressum/Datenschutz.
+
+- Auf jeder dieser Seiten bei 375, 834 und 1440px Dokumentbreite und Überläufe von Hauptinhalt/Footer gemessen: kein horizontaler Seitenüberlauf. Dies betrifft den bestehenden Live-Stand, nicht den noch unveröffentlichten PR.
+- Galerie (21 Bilder), Kontakt und Karriere zusätzlich mobil visuell angesehen. Die Bilder und längeren Texte passen in die Inhaltsbreite; kein zusätzlicher Inhalts-Fix aus diesen Messungen abgeleitet.
+- Live-Menü auf der Fotoseite bei 375 × 812px geöffnet: Panel beginnt 20px unter dem oberen Rand und ist 887px hoch; unteres Ende bei 907px. Kein eigener vertikaler Scrollbereich; Untermenüs bleiben absolut positioniert und ohne Hover unsichtbar (Opacity 0). Bestätigt die im PR korrigierten Menüprobleme.
+- Bewerbungsfenster über „Jetzt Bewerben!“ geöffnet, ohne Daten einzugeben oder eine Bewerbung abzusenden. Formular liegt mobil innerhalb der Breite und seine Container haben vertikalen Scrollbereich.
+- Zusätzlicher Befund am Bewerbungsfenster: kein `role="dialog"`/`aria-modal`; Fokus verbleibt nach Öffnen auf dem auslösenden Link, Escape schließt das Fenster nicht. Das betrifft zusätzlichen Live-Seitencode/Plugin-Integration außerhalb der Theme-Dateien dieses Repositorys und ist hier nur dokumentiert.
+- Formularversand, Uploads, Bild-Lightbox und komplette Tastaturführung wurden nicht vollständig getestet. Die Live-Nachprüfung ersetzt weiterhin keine WordPress-Stagingprüfung des geänderten Themes.
