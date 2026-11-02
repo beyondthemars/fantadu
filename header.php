@@ -51,7 +51,7 @@
         <?php endif; ?>
     </div>
 
-    <button id="menu-toggle">☰ Menü</button>
+    <button id="menu-toggle" type="button" aria-controls="main-menu" aria-expanded="false">☰ Menü</button>
 
     <nav id="main-menu">
         <?php 

@@ -769,3 +769,116 @@ so überdimensioniert aussieht.
         border-radius: 20px; /* kleinere Rundung für kompakteren Look */
     }
 }
+
+/* Mobile corrections: keep desktop geometry and the existing visual language. */
+@media (min-width: 769px) and (max-width: 1000px) {
+    header nav {
+        /* The original 400px of horizontal padding exceeds tablet widths. */
+        padding-right: max(20px, calc((100vw - 600px) / 2));
+        padding-left: max(20px, calc((100vw - 600px) / 2));
+    }
+}
+
+@media (max-width: 768px) {
+    #main-menu {
+        box-sizing: border-box;
+        margin: 0;
+        width: 80%;
+        max-width: 90%;
+        height: 100vh;
+        height: 100dvh;
+        padding: 80px 20px 20px;
+        justify-content: flex-start;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        visibility: hidden;
+        transition: right 0.3s ease, visibility 0.3s;
+    }
+
+    #menu-toggle[aria-expanded="true"] {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        margin: 0;
+    }
+
+    #main-menu.active {
+        visibility: visible;
+    }
+
+    .nav-menu {
+        gap: 0;
+        padding: 0;
+    }
+
+    .nav-menu a {
+        box-sizing: border-box;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        min-height: 44px;
+    }
+
+    /* Touch navigation does not depend on hover; all child links stay reachable. */
+    .nav-menu li ul {
+        position: static;
+        width: 100%;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        box-shadow: none;
+        transition: none;
+    }
+
+    .nav-menu li:has(ul) > a::after {
+        content: "";
+    }
+
+    main {
+        overflow-wrap: anywhere;
+    }
+
+    main img, main video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    main iframe {
+        max-width: 100%;
+    }
+
+    .footer-widgets {
+        flex-direction: column;
+    }
+
+    .footer-column {
+        flex: auto;
+        width: 100%;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .fantadusi-logo {
+        max-width: 100%;
+    }
+
+    .partner-logo {
+        max-width: 100%;
+    }
+
+    .partner-logo > img {
+        max-width: 100%;
+    }
+
+    /* Keep optional notices available without covering text or the menu. */
+    .fixed-image-container {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 25px 10px;
+    }
+
+    .fixed-image-container.image-1, .fixed-image-container.image-2 {
+        inset: auto;
+        max-width: calc(100% - 20px);
+    }
+}
