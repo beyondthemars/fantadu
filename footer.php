@@ -74,36 +74,67 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Keep the button and the mobile drawer in sync, including after resizing.
-    var menuToggle = document.getElementById("menu-toggle");
-    var menu = document.getElementById("main-menu");
-    var mobileMenu = window.matchMedia("(max-width: 768px)");
-
+    var menuToggle = document.getElementById('menu-toggle');
+    var menu = document.getElementById('main-menu');
+    var mobile = window.matchMedia('(max-width: 768px)');
     if (menuToggle && menu) {
-        function setMenuOpen(open, restoreFocus) {
-            menu.classList.toggle("active", open);
-            menuToggle.setAttribute("aria-expanded", String(open));
-            menuToggle.textContent = open ? "× Menü schließen" : "☰ Menü";
+        document.documentElement.classList.add('mobile-menu-ready');
+        var groups = [];
+        menu.querySelectorAll('li').forEach(function(item, index) {
+            var link = item.querySelector(':scope > a');
+            var submenu = item.querySelector(':scope > ul');
+            if (!link || !submenu) return;
+            submenu.id = 'fantadu-submenu-' + index;
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'submenu-toggle';
+            button.setAttribute('aria-controls', submenu.id);
+            button.setAttribute('aria-label', 'Untermenü ' + link.textContent.trim());
+            button.textContent = '+';
+            item.insertBefore(button, submenu);
+            function expand(open) {
+                button.setAttribute('aria-expanded', String(open));
+                button.textContent = open ? '−' : '+';
+                submenu.hidden = mobile.matches && !open;
+            }
+            button.addEventListener('click', function() {
+                expand(button.getAttribute('aria-expanded') !== 'true');
+            });
+            link.addEventListener('click', function(event) {
+                if (mobile.matches && (link.getAttribute('href') === '#' ||
+                    link.href === location.href.split('#')[0] + '#')) {
+                    event.preventDefault();
+                    expand(button.getAttribute('aria-expanded') !== 'true');
+                }
+            });
+            groups.push({ expand: expand });
+        });
+        function setOpen(open, restoreFocus) {
+            menu.classList.toggle('active', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.textContent = open ? '× Menü schließen' : '☰ Menü';
             if (restoreFocus) menuToggle.focus();
         }
-
-        menuToggle.addEventListener("click", function() {
-            setMenuOpen(!menu.classList.contains("active"));
+        function reset() {
+            setOpen(false);
+            groups.forEach(function(group) { group.expand(false); });
+        }
+        menuToggle.addEventListener('click', function() {
+            setOpen(!menu.classList.contains('active'));
         });
-        document.addEventListener("keydown", function(event) {
-            if (event.key === "Escape" && mobileMenu.matches && menu.classList.contains("active")) {
-                setMenuOpen(false, true);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && mobile.matches && menu.classList.contains('active')) {
+                setOpen(false, true);
             }
         });
-        document.addEventListener("click", function(event) {
-            if (mobileMenu.matches && !menu.contains(event.target) && !menuToggle.contains(event.target)) {
-                setMenuOpen(false);
-            }
+        document.addEventListener('click', function(event) {
+            if (mobile.matches && !menu.contains(event.target) && !menuToggle.contains(event.target)) setOpen(false);
         });
-        menu.addEventListener("click", function(event) {
-            if (mobileMenu.matches && event.target.closest("a")) setMenuOpen(false);
+        menu.addEventListener('click', function(event) {
+            if (mobile.matches && event.target.closest('a') && !event.defaultPrevented) setOpen(false);
         });
-        mobileMenu.addEventListener("change", function() { setMenuOpen(false); });
+        mobile.addEventListener('change', reset);
+        reset();
     }
 
     // Fixed-Images Close-Buttons
